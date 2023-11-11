@@ -1,0 +1,96 @@
+
+{% load fegt9_mpg_proteksaun_url %}
+		<!-- ============================================================== -->
+						<!-- pageheader  -->
+						<!-- ============================================================== -->
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="page-header">
+									<h2 class="pageheader-title">{{employeeData.first_name}} {{employeeData.last_name}} </h2>
+								</div>
+							</div>
+						</div>
+						<!-- ============================================================== -->
+						<!-- end pageheader  -->
+						<!-- ============================================================== -->
+						<div class="ecommerce-widget">
+	
+				
+							<div class="row">
+								<!-- ============================================================== -->
+						  
+								<!-- ============================================================== -->
+	
+											  <!-- recent orders  -->
+								<!-- ============================================================== -->
+								<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+									<div class="card">
+										<h5 class="card-header">Contract List  <a href="{% url 'employee:addNewContract' employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm float-right ">  <i class="far fa-paper-plane"></i> New Contract</a></h5>      
+                                        
+                                     
+										<div class="card-body p-0">
+											<div class="table-responsive">
+												<table class="table table-sm">
+													<thead class="bg-light">
+														<tr class="border-0">
+                                                            <th class="border-0">Nu</th>
+                                                            <th class="border-0">Type</th>
+                                                            <th class="border-0">Duration</th>
+                                                            <th class="border-0">Terminate Date</th>
+                                                            <th class="border-0">User</th>
+                                                            <th class="border-0">Status</th>
+                                                            <th class="border-0">#</th>
+													
+														</tr>
+													</thead>
+													<tbody>
+
+                                                        {% for dados in contractEmployee %}
+														<tr>
+                                                            <td>{{forloop.counter}}</td>
+                                                            <td>{{dados.contract_type}}</td>
+                                                            <td>{{dados.start_date}}-{{dados.end_date}}</td>
+                                                            <td>{{dados.terminate_date}}</td>
+                                                            <td>
+                                                            {% if forloop.first %}
+                                                                {% if dados.employeeuser == Null or dados.employeeuser == None %}
+                                                                    No User
+                                                                {% else %}
+                                                                    {{dados.employeeuser.user}}
+                                                                {% endif %}
+                                                            {% endif %}
+           
+                                                           </td>
+                                                           <td>{{dados.is_active}}</td>
+                                                           <td>
+                                                           {% if forloop.first %}
+                                                           <!-- <a href="{% url 'rekrutamentu:publikavaga' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class=" fas fa-volume-up"></i> Publika vaga</a> -->
+                                                           <a href="{% url 'purchase_request:edititempurchase' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-edit"></i> </a>
+                                                            {% endif %}
+          
+                                                          </td>
+														</tr>
+                                                        {% endfor %}
+													
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- ============================================================== -->
+								<!-- end recent orders  -->
+	
+		
+								<!-- ============================================================== -->
+								<!-- ============================================================== -->
+								<!-- customer acquistion  -->
+								<!-- ============================================================== -->
+							
+								<!-- ============================================================== -->
+								<!-- end customer acquistion  -->
+								<!-- ============================================================== -->
+							</div>
+				
+						
+						</div>

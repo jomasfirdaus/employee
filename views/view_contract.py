@@ -1,0 +1,103 @@
+from django.shortcuts import render,redirect
+from employee.models import *
+from contract.models import Contract
+from custom.models import RequestSet
+from django.contrib import messages
+from settingapps.utils import  decrypt_id, encrypt_id
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User, Group
+from contract.forms import ContractForm
+from django.core.exceptions import ObjectDoesNotExist
+
+
+#Your Code Here
+
+
+def detailEmployeeContract(request, id):
+    id = decrypt_id(id)
+    employeeData = Employee.objects.get(id=id)
+    employeeUser = EmployeeUser.objects.filter(employee=employeeData).last()
+    contractEmployee = Contract.objects.filter(employeeuser__employee__id=employeeData.id).order_by('-id')
+
+    context = {
+        "employeeData" : employeeData,
+        "contractEmployee" : contractEmployee,
+        "pajina_employee" : "active",
+        "tab_contract" : "active",
+            }
+    return render(request, 'employee/detail_employee.html',context)
+
+
+def addNewContract(request, id):
+    id = decrypt_id(id)
+    employeeData = Employee.objects.get(id=id)
+    lastid = EmployeeUser.objects.all().last()
+    if lastid:
+        lastid = lastid.id + 1
+    else:
+        lastid = 1
+    employeeContract = 'mamuk'
+    lastContract = Contract.objects.filter(employeeuser__employee__id=id).count()
+    if lastContract > 0:
+        employeeContract = 'iha'
+    form = ContractForm()
+
+    if request.method == 'POST':
+        form = ContractForm(request.POST)
+        if form.is_valid():
+
+            instance = form.save(commit=False)
+
+            if employeeContract == 'iha':
+                instance.employeeuser = EmployeeUser.objects.filter(employee__id=id).last()
+            else:
+                # Kria User foun
+                userId = User.objects.all().last()
+                newuserid = userId.id + 1
+
+                user = User()
+                user.id = newuserid
+                user.username = str(employeeData.first_name) + str(newuserid)
+                user.password = make_password('password')
+                user.first_name = employeeData.first_name
+                user.last_name = employeeData.last_name
+                user.save()
+
+                # Set UserGroup ba Userfoun
+                groupuser = Group.objects.get(name="staf")
+                user = User.objects.get(id=newuserid)
+                user.groups.add(groupuser)
+
+                useremployee = EmployeeUser()
+                useremployee.user_id = newuserid
+                useremployee.employee_id = employeeData.id
+                useremployee.id = lastid
+                useremployee.created_by = User.objects.get(id=request.user.id)
+                useremployee.save()
+                instance.employeeuser = EmployeeUser.objects.get(id=lastid)
+
+            try:
+                contract = Contract.objects.get(employeeuser__employee__id=id, is_active=True)
+                contract.is_active = False
+                contract.save()
+            except:
+                print('')
+            instance.created_by = User.objects.get(id=request.user.id)
+            instance.is_active = True
+            instance.save()
+            messages.success(request, 'Employee created successfully.')  # Success message
+            return redirect('employee:detailEmployeeContract', id=encrypt_id(id))
+        else:
+            error_messages = []  # Initialize an empty list to store custom error messages
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            print(str(error_messages))
+            messages.error(request, 'There was an error. Please correct the form.')  # Error message
+            return redirect('employee:addNewContract', id=encrypt_id(id))
+
+    context = {
+        "form" : form,
+        "pajina_employee" : "active",
+            }
+    return render(request, 'employee/add_employeecontract.html',context)
