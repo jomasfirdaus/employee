@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from employee.models import *
 from contract.models import Contract
-from custom.models import RequestSet
+from custom.models import Department, Position, RequestSet
 from django.contrib import messages
 from settingapps.utils import  decrypt_id, encrypt_id
 from django.contrib.auth.hashers import make_password
@@ -64,9 +64,24 @@ def addNewContract(request, id):
                 user.save()
 
                 # Set UserGroup ba Userfoun
-                groupuser = Group.objects.get(name="staf")
+                position = Position.objects.get(id=int(request.POST['position']))
+                department = Department.objects.get(id=int(request.POST['department']))
+
+                is_executive = request.POST['is_executive']
+
+                strap_position = position.name.replace(" ","_")
+                strap_department = department.name.replace(" ","_")
+
+                if is_executive == "true":
+                    groupname = str("Executive")+str("_")+str(strap_position)
+                else:
+                    groupname = str(strap_position)+str("_")+str(strap_department)
+
+                groupname = Group.objects.get(name=groupname)
+
                 user = User.objects.get(id=newuserid)
-                user.groups.add(groupuser)
+                user.groups.add(groupname)
+                
 
                 useremployee = EmployeeUser()
                 useremployee.user_id = newuserid
