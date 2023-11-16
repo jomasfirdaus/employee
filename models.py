@@ -31,6 +31,8 @@ class Employee(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True, blank=False, related_name="Employeecountry")
     image = models.ImageField(default='default.jpg', upload_to='funsionariu/foto', null=True,  blank=True,
                               validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
+    signature = models.ImageField(default='default.jpg', upload_to='funsionariu/signature', null=True,  blank=True,
+                              validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
     
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="Employeecreatedbys")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
