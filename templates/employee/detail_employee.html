@@ -54,7 +54,19 @@
 												<a class="nav-link {{tab_contract}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeContract' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Contract</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link" id="contact-vertical-tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">User</a>
+												<a class="nav-link {{tab_payroll}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeePayroll' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Payroll</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_feducation}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeFormalEducation' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Formal Education</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_nfeducation}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeNFormalEducation' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Non Formal Education</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_workexperience}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeWorkExperience' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Work Experience</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_languageskills}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeLanguageSkills' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Language Skills</a>
 											</li>
 										</ul>
 										<div class="tab-content" id="myTabContent3">
@@ -63,6 +75,16 @@
 												{% include 'employee/tab_personal.html' %}
 											{% elif tab_contract %}
 												{% include 'employee/tab_contract.html' %}
+											{% elif tab_payroll %}
+												{% include 'employee/tab_payroll.html' %}
+											{% elif tab_feducation %}
+												{% include 'employee/tab_feducation.html' %}
+											{% elif tab_nfeducation %}
+												{% include 'employee/tab_nfeducation.html' %}
+											{% elif tab_workexperience %}
+												{% include 'employee/tab_workexperience.html' %}
+											{% elif tab_languageskills %}
+												{% include 'employee/tab_languageskills.html' %}
 											{% endif %}
 
 										

@@ -12,13 +12,29 @@ urlpatterns = [
 	path('edit/employee/<str:id>/', views.editEmployee, name='editEmployee'),
     
 	path('detail/employee/<str:id>/', views.detailEmployee, name='detailEmployee'),
-	path('detail/employee/contract/<str:id>/', views.detailEmployeeContract, name='detailEmployeeContract'),
     
+	path('detail/employee/contract/<str:id>/', views.detailEmployeeContract, name='detailEmployeeContract'),
 	path('detail/employee/add/new/contract/<str:id>/', views.addNewContract, name='addNewContract'),
+    
+	path('detail/employee/payroll/<str:id>/', views.detailEmployeePayroll, name='detailEmployeePayroll'),
+	path('detail/employee/payroll/add/payroll/<str:id>/', views.addNewPayroll, name='addNewPayroll'),
+    
+	path('detail/employee/formal/education/<str:id>/', views.detailEmployeeFormalEducation, name='detailEmployeeFormalEducation'),
+	path('detail/employee/formal/education/add/formal/education/<str:id>/', views.addNewFormalEducation, name='addNewFormalEducation'),
+    
+	path('detail/employee/nonformal/education/<str:id>/', views.detailEmployeeNFormalEducation, name='detailEmployeeNFormalEducation'),
+	path('detail/employee/nonformal/education/add/nonformal/education/<str:id>/', views.addNewNFormalEducation, name='addNewNFormalEducation'),
+    
+	path('detail/employee/work/experience/<str:id>/', views.detailEmployeeWorkExperience, name='detailEmployeeWorkExperience'),
+	path('detail/employee/work/experience/add/work/experience/<str:id>/', views.addNewWorkExperience, name='addNewWorkExperience'),
+    
+	path('detail/employee/language/skills/<str:id>/', views.detailEmployeeLanguageSkills, name='detailEmployeeLanguageSkills'),
+	path('detail/employee/language/skills/add/language/skills/<str:id>/', views.addNewLanguageSkills, name='addNewLanguageSkills'),
+    
     
 	path('detail/employee/create/new/user/<str:id>/', views.createnewuser, name='createnewuser'),
 	path('detail/employee/change/user/<str:id_employee>/<str:id_contract>/', views.changeuser, name='changeuser'),
-
+    
 	# path('edit/item/travel/<str:id_item>/', views.edititemtravel, name='edititemtravel'),
 	# path('apaga/item/travel/<str:id_item>/', views.apagaitemtravel, name='apagaitemtravel'),
 	# path('aproved/item/travel/<str:id_item>/', views.aproveditemtravel, name='aproveditemtravel'),

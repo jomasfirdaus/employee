@@ -65,16 +65,21 @@ def addNewContract(request, id):
 
                 # Set UserGroup ba Userfoun
                 position = Position.objects.get(id=int(request.POST['position']))
-                department = Department.objects.get(id=int(request.POST['department']))
+                # department = Department.objects.get(id=int(request.POST['department']))
 
                 is_executive = request.POST['is_executive']
 
                 strap_position = position.name.replace(" ","_")
-                strap_department = department.name.replace(" ","_")
+                # strap_department = department.name.replace(" ","_")
 
                 if is_executive == "true":
                     groupname = str("Executive")+str("_")+str(strap_position)
+                    if instance.department is not None:
+                        messages.success(request, 'Sorry! Executive does not have department. Please check your form')  # Success message
+                        return redirect('employee:addNewContract', id=encrypt_id(id))
                 else:
+                    department = Department.objects.get(id=int(request.POST['department']))
+                    strap_department = department.name.replace(" ","_")
                     groupname = str(strap_position)+str("_")+str(strap_department)
 
                 groupname = Group.objects.get(name=groupname)

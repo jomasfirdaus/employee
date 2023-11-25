@@ -1,16 +1,177 @@
-<div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
-    <p class="lead">{{employeeData.first_name}} {{employeeData.last_name}}</p>
-    <p><b>ID Employee:</b> {{employeeData.emp_id}}</p>
-    <p><b>Identify ID:</b> {{employeeData.identify_id}}</p>
-    <p><b>address:</b> {{employeeData.address}}</p>
-    <p><b>Place of Birth:</b> {{employeeData.pob}}</p>
-    <p><b>Date of Birth:</b> {{employeeData.dob}}</p>
-    <p><b>Sex:</b> {{employeeData.sex}}</p>
-    <p><b>Marital:</b> {{employeeData.marital}}</p>
-    <p><b>Phone:</b> {{employeeData.phone}}</p>
-    <p><b>Oficial Email:</b> {{employeeData.oficial_email}}</p>
-    <p><b>Personal Email:</b> {{employeeData.personal_email}}</p>
-    <p><b>Blood:</b> {{employeeData.blood}}</p>
-    <p><b>Parents:</b> Father ({{employeeData.father}}), Mother ({{employeeData.mother}})</p>
-    <p><b>Country:</b> {{employeeData.country}}</p>
+<div class="dashboard-short-list">
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Full Name </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.first_name}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">First Name</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.last_name}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Last Name</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Identification </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.emp_id}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Employee ID</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.identify_id}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Identify ID</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Address </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.country}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Country</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.address}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Address</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Date and Place of Birth </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.pob}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Place of Birth</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.dob}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Date of Birth</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Parents </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.father}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Father</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.mother}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Mother</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Contact </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.phone}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Phone</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.oficial_email}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Oficial Email</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.personal_email}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Personal Email</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 co-12">
+            <section class="card card-fluid">
+                <h5 class="card-header drag-handle"> Others </h5>
+                <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.gender}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Sex</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.marital}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Marital Status</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.blood}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Blood</button>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
 </div>
+<!-- 
+    
+ -->

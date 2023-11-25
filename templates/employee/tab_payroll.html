@@ -25,53 +25,48 @@
 								<!-- ============================================================== -->
 								<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
 									<div class="card">
-										<h5 class="card-header">Contract List  <a href="{% url 'employee:addNewContract' employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm float-right ">  <i class="far fa-paper-plane"></i> New Contract</a></h5>
-                                        
+										<h5 class="card-header">Payroll List
 										<div class="card-body p-0">
 											<div class="table-responsive">
 												<table class="table table-sm">
 													<thead class="bg-light">
 														<tr class="border-0">
-                                                            <th class="border-0">Nu {{employeeData.id}}</th>
+                                                            <th class="border-0">Nu</th>
                                                             <th class="border-0">Type</th>
                                                             <th class="border-0">Position</th>
                                                             <th class="border-0">Department</th>
-                                                            <th class="border-0">Duration</th>
-                                                            <th class="border-0">Terminate Date</th>
-                                                            <th class="border-0">User</th>
-                                                            <th class="border-0">Status</th>
+                                                            <th class="border-0">Grau</th>
+                                                            <th class="border-0">Gross Salary</th>
+                                                            <th class="border-0"></th>
+                                                            <th class="border-0">Tax (10%)</th>
+                                                            <th class="border-0"></th>
+                                                            <th class="border-0">Social Security (4%)</th>
+                                                            <th class="border-0"></th>
+                                                            <th class="border-0">Net</th>
                                                             <th class="border-0">#</th>
 													
 														</tr>
 													</thead>
 													<tbody>
 
-                                                        {% for dados in contractEmployee %}
+                                                        {% for dados in payrolllist %}
 														<tr>
                                                             <td>{{forloop.counter}}</td>
-                                                            <td>{{dados.contract_type}}</td>
-                                                            <td>{{dados.position}}</td>
-                                                            <td>{{dados.department}}</td>
-                                                            <td>{{dados.start_date}}-{{dados.end_date}}</td>
-                                                            <td>{{dados.terminate_date}}</td>
-                                                            <td>
-                                                            {% if forloop.first %}
-                                                                {% if dados.employeeuser.user == Null or dados.employeeuser.user == None %}
-                                                                    No User | <a href="{% url 'employee:createnewuser' employeeData.id|encrypt_id_tag %}">Create User</a>
-                                                                {% else %}
-                                                                    {{dados.employeeuser.user}} ({{dados.employeeuser.user.groups.all.0.name}})<br>
-																	<a href="{% url 'employee:changeuser' employeeData.id|encrypt_id_tag dados.id|encrypt_id_tag %}">Change User</a>
-                                                                {% endif %}
-															{% else %}
-																{{dados.employeeuser.user}}
-                                                            {% endif %}
-           
-                                                           </td>
-                                                           <td>{{dados.is_active}}</td>
+                                                            <td>{{dados.contract.contract_type}}</td>
+                                                            <td>{{dados.contract.position}}</td>
+                                                            <td>{{dados.contract.department}}</td>
+                                                            <td>{{dados.contract.grade}}</td>
+                                                            <td>{{dados.gross}}</td>
+															<td>-</td>
+                                                            <td>{{dados.tax}}</td>
+															<td>-</td>
+                                                            <td>{{dados.social}}</td>
+															<td>=</td>
+                                                            <td>{{dados.net}}</td>
                                                            <td>
-                                                           {% if forloop.first and dados.is_active %}
+                                                           {% if forloop.first %}
                                                            <!-- <a href="{% url 'rekrutamentu:publikavaga' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class=" fas fa-volume-up"></i> Publika vaga</a> -->
-                                                           <a href="{% url 'employee:addNewPayroll' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-paper-plane"></i> </a>
+                                                           <a href="{% url 'purchase_request:edititempurchase' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-edit"></i> </a>
                                                             {% endif %}
           
                                                           </td>

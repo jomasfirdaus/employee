@@ -1,0 +1,84 @@
+
+{% load fegt9_mpg_proteksaun_url %}
+		<!-- ============================================================== -->
+						<!-- pageheader  -->
+						<!-- ============================================================== -->
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="page-header">
+									<h2 class="pageheader-title">{{employeeData.first_name}} {{employeeData.last_name}} </h2>
+								</div>
+							</div>
+						</div>
+						<!-- ============================================================== -->
+						<!-- end pageheader  -->
+						<!-- ============================================================== -->
+						<div class="ecommerce-widget">
+	
+				
+							<div class="row">
+								<!-- ============================================================== -->
+						  
+								<!-- ============================================================== -->
+	
+											  <!-- recent orders  -->
+								<!-- ============================================================== -->
+								<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+									<div class="card">
+										<h5 class="card-header">Non Formal Education  <a href="{% url 'employee:addNewNFormalEducation' employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm float-right ">  <i class="far fa-paper-plane"></i> New Formal Education</a></h5>
+										<div class="card-body p-0">
+											<div class="table-responsive">
+												<table class="table table-sm">
+													<thead class="bg-light">
+														<tr class="border-0">
+                                                            <th class="border-0">Nu</th>
+                                                            <th class="border-0">Title</th>
+                                                            <th class="border-0">Tutelary Entity</th>
+                                                            <th class="border-0">Start Date</th>
+                                                            <th class="border-0">End Date</th>
+                                                            <th class="border-0">Hours</th>
+                                                            <th class="border-0">Area</th>
+                                                            <th class="border-0">Year</th>
+                                                            <th class="border-0">#</th>
+													
+														</tr>
+													</thead>
+													<tbody>
+
+                                                        {% for dados in data %}
+														<tr>
+                                                            <td>{{forloop.counter}}</td>
+                                                            <td>{{dados.title}}</td>
+                                                            <td>{{dados.tutelary_entity}}</td>
+                                                            <td>{{dados.faculty}}</td>
+                                                            <td>{{dados.start_date}}</td>
+                                                            <td>{{dados.end_date}}</td>
+                                                            <td>{{dados.hours}}</td>
+                                                            <td>{{dados.area}}</td>
+                                                            <td>{{dados.year}}</td>
+                                                           <td></td>
+														</tr>
+                                                        {% endfor %}
+													
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- ============================================================== -->
+								<!-- end recent orders  -->
+	
+		
+								<!-- ============================================================== -->
+								<!-- ============================================================== -->
+								<!-- customer acquistion  -->
+								<!-- ============================================================== -->
+							
+								<!-- ============================================================== -->
+								<!-- end customer acquistion  -->
+								<!-- ============================================================== -->
+							</div>
+				
+						
+						</div>
