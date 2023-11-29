@@ -68,6 +68,15 @@
 											<li class="nav-item">
 												<a class="nav-link {{tab_languageskills}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeLanguageSkills' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Language Skills</a>
 											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_criminalrecord}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeCriminalRecord' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Criminal Record</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_capacitybuilding}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeCapacityBuilding' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Capacity Building</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {{tab_sessionrefresher}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeSessionRefresher' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Session Refresher</a>
+											</li>
 										</ul>
 										<div class="tab-content" id="myTabContent3">
 											
@@ -85,6 +94,12 @@
 												{% include 'employee/tab_workexperience.html' %}
 											{% elif tab_languageskills %}
 												{% include 'employee/tab_languageskills.html' %}
+											{% elif tab_criminalrecord %}
+												{% include 'employee/tab_criminalrecord.html' %}
+											{% elif tab_capacitybuilding %}
+												{% include 'employee/tab_capacitybuilding.html' %}
+											{% elif tab_sessionrefresher %}
+												{% include 'employee/tab_sessionrefresher.html' %}
 											{% endif %}
 
 										

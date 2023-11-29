@@ -2,8 +2,7 @@ import datetime
 from django.db import models
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
-from contract.models import Contract
-from custom.models import Country, Year
+from custom.models import Country, Year, Munisipiu, Postu, Suku
 
 # Create your models here.
 
@@ -14,11 +13,15 @@ class ActiveManager(models.Manager):
 
 class Employee(models.Model):
     emp_id = models.CharField(max_length=10, null=True, blank=True, verbose_name="Employee ID")
-    identify_id = models.CharField(max_length=10, null=True, blank=True, verbose_name="Identify ID")
+    identify_id = models.CharField(max_length=10, null=True, blank=True, verbose_name="Identification (BI, Eleitoral, Passport)")
+    social_id = models.CharField(max_length=10, null=True, blank=True, verbose_name="Social ID")
     pin = models.IntegerField(null=True, blank=True)
     first_name = models.CharField(max_length=30, null=True)
     last_name = models.CharField(max_length=30, null=True, blank=True)
     address = models.CharField(max_length=30, null=True, blank=True)
+    munisipiu = models.ForeignKey(Munisipiu, on_delete=models.CASCADE, null=True, blank=False, related_name="Employeemunisipiu")
+    postu = models.ForeignKey(Postu, on_delete=models.CASCADE, null=True, blank=False, related_name="Employeepostu")
+    suku = models.ForeignKey(Suku, on_delete=models.CASCADE, null=True, blank=False, related_name="Employeesuku")
     pob = models.CharField(max_length=100, blank=True, null=True, verbose_name="Place of birth")
     dob = models.DateField(null=True, blank=True)
     sex = models.CharField(choices=[('Male','Male'),('Female','Female')], max_length=6, null=True, blank=True)
@@ -214,7 +217,7 @@ class FormalEducation(models.Model):
     graduation_year = models.DateField(null=True, blank=True)
     year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True, blank=True, related_name="FormalEducationyear")
     file = models.FileField(upload_to="upload_formal", null=True, blank=True,
-    validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach certificate")
+                            validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach certificate")
     is_active = models.BooleanField(default=True)
     is_science = models.BooleanField(default=False, null=True, blank=True)
 
@@ -246,7 +249,7 @@ class NonFormalEducation(models.Model):
     hours = models.IntegerField(null=True, blank=True)
     area = models.CharField(max_length=200, null=True, blank=True)
     file = models.FileField(upload_to="upload_nonformal", null=True, blank=True,
-    validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach certicate")
+                            validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach certicate")
     is_active = models.BooleanField(default=True)
     traning_id = models.IntegerField(null=True, blank=True)
     year = models.ForeignKey(Year, on_delete=models.CASCADE, null=True, blank=True)
@@ -279,6 +282,8 @@ class WorkExperience(models.Model):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
+    file_experience = models.FileField(upload_to='upload_experience', null=True, blank=True,
+                                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Work Experience")
 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="WorkExperiencecreatedbys")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
@@ -288,7 +293,7 @@ class WorkExperience(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        template = '{0.employee}-{0.user}'
+        template = '{0.employee}'
         return template.format(self)
 
     def delete(self, user):
@@ -307,7 +312,7 @@ class EmpLanguage(models.Model):
     read = models.CharField(choices=[('Native','Native'),('Good','Good'),('Sufficient','Sufficient'),('Basic','Basic')], max_length=15, null=True, blank=True)
     write = models.CharField(choices=[('Native','Native'),('Good','Good'),('Sufficient','Sufficient'),('Basic','Basic')], max_length=15, null=True, blank=True)
     file_language = models.FileField(upload_to='upload_languages', null=True, blank=True,
-    validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Certificado")
+                                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Certificado")
 
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="EmpLanguagecreatedbys")
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
@@ -317,7 +322,96 @@ class EmpLanguage(models.Model):
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        template = '{0.contract}-{0.language}'
+        template = '{0.employee}-{0.language}'
+        return template.format(self)
+
+    def delete(self, user):
+        self.deleted_at = str(datetime.timezone.now())
+        self.deleted_by = user
+        self.save()
+
+    default_objects = models.Manager()  # The default manager
+    objects = ActiveManager()
+
+
+class CriminalRecord(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="CriminalRecordemployee")
+    issue_at = models.DateField()
+    issue_by = models.CharField(max_length=100, null=True, blank=True)
+    expire_at = models.DateField()
+    file_criminal = models.FileField(upload_to='upload_criminal', null=True, blank=True,
+                                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Criminal Record")
+    is_active = models.BooleanField(default=True)
+
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CriminalRecordcreatedbys")
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CriminalRecordupdatetedbys")
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    deleted_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CriminalRecorddeletedbys")
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        template = '{0.employee}'
+        return template.format(self)
+
+    def delete(self, user):
+        self.deleted_at = str(datetime.timezone.now())
+        self.deleted_by = user
+        self.save()
+
+    default_objects = models.Manager()  # The default manager
+    objects = ActiveManager()
+
+
+class CapacityBuilding(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="CapacityBuildingemployee")
+    place = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    file_capacity = models.FileField(upload_to='upload_capacity', null=True, blank=True,
+                                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Capacity Building")
+    is_active = models.BooleanField(default=True)
+
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CapacityBuildingcreatedbys")
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CapacityBuildingupdatetedbys")
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    deleted_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="CapacityBuildingdeletedbys")
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        template = '{0.title}'
+        return template.format(self)
+
+    def delete(self, user):
+        self.deleted_at = str(datetime.timezone.now())
+        self.deleted_by = user
+        self.save()
+
+    default_objects = models.Manager()  # The default manager
+    objects = ActiveManager()
+
+
+class SessionRefresher(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="SessionRefresheremployee")
+    place = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    file_refresher = models.FileField(upload_to='upload_refresher', null=True, blank=True,
+                                     validators=[FileExtensionValidator(allowed_extensions=['pdf'])], verbose_name="Attach Refresher")
+    is_active = models.BooleanField(default=True)
+
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="SessionRefreshercreatedbys")
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="SessionRefresherupdatetedbys")
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+    deleted_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="SessionRefresherdeletedbys")
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        template = '{0.title}'
         return template.format(self)
 
     def delete(self, user):

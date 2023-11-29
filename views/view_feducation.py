@@ -12,10 +12,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def detailEmployeeFormalEducation(request, id):
-    group = request.user.groups.all()[0].name
     id = decrypt_id(id)
     employeeData = Employee.objects.get(id=id)
-    data = FormalEducation.objects.all().order_by('-id')
+    data = FormalEducation.objects.filter(employee=employeeData).order_by('-id')
 
     context = {
         "employeeData" : employeeData,

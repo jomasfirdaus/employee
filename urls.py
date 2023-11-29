@@ -31,6 +31,15 @@ urlpatterns = [
 	path('detail/employee/language/skills/<str:id>/', views.detailEmployeeLanguageSkills, name='detailEmployeeLanguageSkills'),
 	path('detail/employee/language/skills/add/language/skills/<str:id>/', views.addNewLanguageSkills, name='addNewLanguageSkills'),
     
+	path('detail/employee/criminal/record/<str:id>/', views.detailEmployeeCriminalRecord, name='detailEmployeeCriminalRecord'),
+	path('detail/employee/criminal/record/add/criminal/record/<str:id>/', views.addNewCriminalRecord, name='addNewCriminalRecord'),
+    
+	path('detail/employee/capacity/building/<str:id>/', views.detailEmployeeCapacityBuilding, name='detailEmployeeCapacityBuilding'),
+	path('detail/employee/capacity/building/add/capacity/building/<str:id>/', views.addNewCapacityBuilding, name='addNewCapacityBuilding'),
+    
+	path('detail/employee/session/refresher/<str:id>/', views.detailEmployeeSessionRefresher, name='detailEmployeeSessionRefresher'),
+	path('detail/employee/session/refresher/add/session/refresher/<str:id>/', views.addNewSessionRefresher, name='addNewSessionRefresher'),
+    
     
 	path('detail/employee/create/new/user/<str:id>/', views.createnewuser, name='createnewuser'),
 	path('detail/employee/change/user/<str:id_employee>/<str:id_contract>/', views.changeuser, name='changeuser'),

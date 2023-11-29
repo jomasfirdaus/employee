@@ -87,3 +87,25 @@ class EmpLanguageAdmin(ImportExportModelAdmin):
 admin.site.register(EmpLanguage, EmpLanguageAdmin)
 
 
+class CriminalRecordResource(resources.ModelResource):
+    class Meta:
+        model = CriminalRecord
+class CriminalRecordAdmin(ImportExportModelAdmin):
+    resource_class = CriminalRecordResource
+admin.site.register(CriminalRecord, CriminalRecordAdmin)
+
+
+class CapacityBuildingResource(resources.ModelResource):
+    class Meta:
+        model = CapacityBuilding
+class CapacityBuildingAdmin(ImportExportModelAdmin):
+    resource_class = CapacityBuildingResource
+admin.site.register(CapacityBuilding, CapacityBuildingAdmin)
+
+
+class SessionRefresherResource(resources.ModelResource):
+    class Meta:
+        model = SessionRefresher
+class SessionRefresherAdmin(ImportExportModelAdmin):
+    resource_class = SessionRefresherResource
+admin.site.register(SessionRefresher, SessionRefresherAdmin)

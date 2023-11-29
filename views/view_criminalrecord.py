@@ -1,47 +1,44 @@
 from django.shortcuts import render,redirect
-from employee.models import Employee, NonFormalEducation
+from employee.models import Employee
 from django.contrib import messages
 from settingapps.utils import  decrypt_id, encrypt_id
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User, Group
-from employee.forms import EmpLanguageForm
-from employee.models import EmpLanguage
-from django.core.exceptions import ObjectDoesNotExist
+from employee.forms import CriminalRecordForm
+from employee.models import CriminalRecord
 
 
 #Your Code Here
 
 
-def detailEmployeeLanguageSkills(request, id):
+def detailEmployeeCriminalRecord(request, id):
     id = decrypt_id(id)
     employeeData = Employee.objects.get(id=id)
-    data = EmpLanguage.objects.filter(employee=employeeData).order_by('-id')
+    data = CriminalRecord.objects.filter(employee=employeeData).order_by('-id')
 
     context = {
         "employeeData" : employeeData,
         "data" : data,
         "pajina_employee" : "active",
-        "tab_languageskills" : "active",
+        "tab_criminalrecord" : "active",
             }
     return render(request, 'employee/detail_employee.html',context)
 
 
-def addNewLanguageSkills(request, id):
+def addNewCriminalRecord(request, id):
     id = decrypt_id(id)
 
-    form = EmpLanguageForm()
+    form = CriminalRecordForm()
 	
     employeeData = Employee.objects.get(id=id)
 	
     if request.method == 'POST':
-        form = EmpLanguageForm(request.POST)
+        form = CriminalRecordForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.employee_id = id
             instance.created_by = request.user
             instance.save()
-            messages.success(request, f'Language Skills add sucessfuly')
-            return redirect('employee:detailEmployeeLanguageSkills', id=encrypt_id(id))
+            messages.success(request, f'Capacity Building add sucessfuly')
+            return redirect('employee:detailEmployeeCriminalRecord', id=encrypt_id(id))
         else:
             error_messages = []  # Initialize an empty list to store custom error messages
             for field, errors in form.errors.items():
@@ -50,7 +47,7 @@ def addNewLanguageSkills(request, id):
             print(str(error_messages))
             messages.error(request, 'There was an error. Please correct the form.')  # Error message
     else:
-        form = EmpLanguageForm()
+        form = CriminalRecordForm()
     context = {
         'employeeData': employeeData,
         'form': form,

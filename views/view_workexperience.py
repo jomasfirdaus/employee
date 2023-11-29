@@ -13,10 +13,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def detailEmployeeWorkExperience(request, id):
-    group = request.user.groups.all()[0].name
     id = decrypt_id(id)
     employeeData = Employee.objects.get(id=id)
-    data = WorkExperience.objects.all().order_by('-id')
+    data = WorkExperience.objects.filter(employee=employeeData).order_by('-id')
 
     context = {
         "employeeData" : employeeData,

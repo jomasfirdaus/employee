@@ -6,3 +6,6 @@ from .view_feducation import *
 from .view_nfeducation import *
 from .view_workexperience import *
 from .view_languageskills import *
+from .view_capacitybuilding import *
+from .view_criminalrecord import *
+from .view_sessionrefresher import *

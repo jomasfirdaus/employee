@@ -1,23 +1,19 @@
 from django.shortcuts import render,redirect
 from employee.models import *
 from payroll.models import Salary
-from custom.models import Department, Position, RequestSet
 from django.contrib import messages
 from settingapps.utils import  decrypt_id, encrypt_id
-from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import User, Group
 from payroll.forms import SalaryForm
-from django.core.exceptions import ObjectDoesNotExist
 
 
 #Your Code Here
 
 
 def detailEmployeePayroll(request, id):
-    group = request.user.groups.all()[0].name
     id = decrypt_id(id)
     employeeData = Employee.objects.get(id=id)
-    payrolllist = Salary.objects.all().order_by('-id')
+    contractData = Contract.objects.get(employeeuser__employee=employeeData, is_active=True)
+    payrolllist = Salary.objects.filter(contract=contractData).order_by('-id')
 
     context = {
         "employeeData" : employeeData,

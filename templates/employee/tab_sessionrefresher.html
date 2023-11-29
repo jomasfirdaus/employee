@@ -25,20 +25,17 @@
 								<!-- ============================================================== -->
 								<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
 									<div class="card">
-										<h5 class="card-header">Non Formal Education  <a href="{% url 'employee:addNewNFormalEducation' employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm float-right ">  <i class="far fa-paper-plane"></i> New Formal Education</a></h5>
+										<h5 class="card-header">Session Refresher <a href="{% url 'employee:addNewSessionRefresher' employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm float-right ">  <i class="far fa-paper-plane"></i> New Session Refresher</a></h5>
 										<div class="card-body p-0">
 											<div class="table-responsive">
 												<table class="table table-sm">
 													<thead class="bg-light">
 														<tr class="border-0">
                                                             <th class="border-0">Nu</th>
+                                                            <th class="border-0">Place</th>
                                                             <th class="border-0">Title</th>
-                                                            <th class="border-0">Tutelary Entity</th>
                                                             <th class="border-0">Start Date</th>
                                                             <th class="border-0">End Date</th>
-                                                            <th class="border-0">Hours</th>
-                                                            <th class="border-0">Area</th>
-                                                            <th class="border-0">Year</th>
                                                             <th class="border-0">#</th>
 													
 														</tr>
@@ -48,13 +45,10 @@
                                                         {% for dados in data %}
 														<tr>
                                                             <td>{{forloop.counter}}</td>
+                                                            <td>{{dados.place}}</td>
                                                             <td>{{dados.title}}</td>
-                                                            <td>{{dados.tutelary_entity}}</td>
                                                             <td>{{dados.start_date}}</td>
                                                             <td>{{dados.end_date}}</td>
-                                                            <td>{{dados.hours}}</td>
-                                                            <td>{{dados.area}}</td>
-                                                            <td>{{dados.year}}</td>
                                                            <td></td>
 														</tr>
                                                         {% endfor %}

@@ -39,6 +39,13 @@
                             <button class="btn btn-sm btn-outline-light">Identify ID</button>
                         </div>
                     </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.social_id}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Social ID</button>
+                        </div>
+                    </li>
                 </ul>
             </section>
         </div>
@@ -61,6 +68,27 @@
                         <div> {{employeeData.address}} </div>
                         <div class="btn-group ml-auto">
                             <button class="btn btn-sm btn-outline-light">Address</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.munisipiu}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Munisipiu</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.postu}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Postu</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item align-items-center drag-handle">
+                        <span class="drag-indicator"></span>
+                        <div> {{employeeData.suku}} </div>
+                        <div class="btn-group ml-auto">
+                            <button class="btn btn-sm btn-outline-light">Suku</button>
                         </div>
                     </li>
                 </ul>
@@ -148,7 +176,7 @@
                 <ul class="sortable-lists list-group list-group-flush list-group-bordered" id="items">
                     <li class="list-group-item align-items-center drag-handle">
                         <span class="drag-indicator"></span>
-                        <div> {{employeeData.gender}} </div>
+                        <div> {{employeeData.sex}} </div>
                         <div class="btn-group ml-auto">
                             <button class="btn btn-sm btn-outline-light">Sex</button>
                         </div>

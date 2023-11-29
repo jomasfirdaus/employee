@@ -24,6 +24,7 @@ class EmployeeForm(forms.ModelForm):
             Row(
                 Column('emp_id', css_class='col-md-4'),
                 Column('identify_id', css_class='col-md-4'),
+                Column('social_id', css_class='col-md-4'),
             ),
 
             Row(
@@ -32,7 +33,10 @@ class EmployeeForm(forms.ModelForm):
             ),
 
             Row(
-                Column('address', css_class='col-md-6'),
+                Column('address', css_class='col-md-3'),
+                Column('munisipiu', css_class='col-md-3'),
+                Column('postu', css_class='col-md-3'),
+                Column('suku', css_class='col-md-3'),
             ),
             
             Row(
@@ -76,9 +80,13 @@ class EmployeeForm(forms.ModelForm):
         # Add CSS classes to form fields if needed
         self.fields['emp_id'].widget.attrs['class'] = 'form-control'
         self.fields['identify_id'].widget.attrs['class'] = 'form-control'
+        self.fields['social_id'].widget.attrs['class'] = 'form-control'
         self.fields['first_name'].widget.attrs['class'] = 'form-control'
         self.fields['last_name'].widget.attrs['class'] = 'form-control'
         self.fields['address'].widget.attrs['class'] = 'form-control'
+        self.fields['munisipiu'].widget.attrs['class'] = 'form-control'
+        self.fields['postu'].widget.attrs['class'] = 'form-control'
+        self.fields['suku'].widget.attrs['class'] = 'form-control'
         self.fields['pob'].widget.attrs['class'] = 'form-control'
         self.fields['dob'].widget.input_type = 'date'
         self.fields['sex'].widget.attrs['class'] = 'form-control'
@@ -370,3 +378,130 @@ class EmpLanguageForm(forms.ModelForm):
         self.fields['speak'].widget.attrs['class'] = 'form-control'
         self.fields['write'].widget.attrs['class'] = 'form-control'
         self.fields['file_language'].widget.attrs['class'] = 'form-control'
+
+
+class CriminalRecordForm(forms.ModelForm):
+    class Meta:
+        model = CriminalRecord
+        fields = '__all__'  # You can specify the fields you want to include if needed
+        exclude = ['employee']
+
+    def __init__(self, *args, **kwargs):
+        super(CriminalRecordForm, self).__init__(*args, **kwargs)
+
+        # Create a form helper and specify the layout
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            Row(
+                Column('issue_by', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('issue_at', css_class='col-md-4'),
+                Column('expire_at', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('file_criminal', css_class='col-md-4'),
+            ),
+
+            Div(
+                Button('cancel', 'Kansela', css_class='btn-secondary btn-sm', onclick="window.history.back();"),
+                Submit('post', 'Submete', css_class='btn-primary btn-sm'),
+            
+                css_class='text-right',
+            ),
+        )
+
+        # Add CSS classes to form fields if needed
+        self.fields['issue_by'].widget.attrs['class'] = 'form-control'
+        self.fields['issue_at'].widget.input_type = 'date'
+        self.fields['expire_at'].widget.input_type = 'date'
+        self.fields['file_criminal'].widget.attrs['class'] = 'form-control'
+
+
+class CapacityBuildingForm(forms.ModelForm):
+    class Meta:
+        model = CapacityBuilding
+        fields = '__all__'  # You can specify the fields you want to include if needed
+        exclude = ['employee']
+
+    def __init__(self, *args, **kwargs):
+        super(CapacityBuildingForm, self).__init__(*args, **kwargs)
+
+        # Create a form helper and specify the layout
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            Row(
+                Column('place', css_class='col-md-4'),
+                Column('title', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('start_date', css_class='col-md-4'),
+                Column('end_date', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('file_capacity', css_class='col-md-4'),
+            ),
+
+            Div(
+                Button('cancel', 'Kansela', css_class='btn-secondary btn-sm', onclick="window.history.back();"),
+                Submit('post', 'Submete', css_class='btn-primary btn-sm'),
+            
+                css_class='text-right',
+            ),
+        )
+
+        # Add CSS classes to form fields if needed
+        self.fields['place'].widget.attrs['class'] = 'form-control'
+        self.fields['title'].widget.attrs['class'] = 'form-control'
+        self.fields['start_date'].widget.input_type = 'date'
+        self.fields['end_date'].widget.input_type = 'date'
+        self.fields['file_capacity'].widget.attrs['class'] = 'form-control'
+
+
+class SessionRefresherForm(forms.ModelForm):
+    class Meta:
+        model = SessionRefresher
+        fields = '__all__'  # You can specify the fields you want to include if needed
+        exclude = ['employee']
+
+    def __init__(self, *args, **kwargs):
+        super(SessionRefresherForm, self).__init__(*args, **kwargs)
+
+        # Create a form helper and specify the layout
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            Row(
+                Column('place', css_class='col-md-4'),
+                Column('title', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('start_date', css_class='col-md-4'),
+                Column('end_date', css_class='col-md-4'),
+            ),
+
+            Row(
+                Column('file_refresher', css_class='col-md-4'),
+            ),
+
+            Div(
+                Button('cancel', 'Kansela', css_class='btn-secondary btn-sm', onclick="window.history.back();"),
+                Submit('post', 'Submete', css_class='btn-primary btn-sm'),
+            
+                css_class='text-right',
+            ),
+        )
+
+        # Add CSS classes to form fields if needed
+        self.fields['place'].widget.attrs['class'] = 'form-control'
+        self.fields['title'].widget.attrs['class'] = 'form-control'
+        self.fields['start_date'].widget.input_type = 'date'
+        self.fields['end_date'].widget.input_type = 'date'
+        self.fields['file_refresher'].widget.attrs['class'] = 'form-control'
