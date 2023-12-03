@@ -44,7 +44,7 @@ def addEmployee(request):
         "form" : form,
         "pajina_employee" : "active",
             }
-    return render(request, 'employee/add_employee.html',context)
+    return render(request, 'employee/formulariu.html',context)
 
 
 def editEmployee(request, id):
