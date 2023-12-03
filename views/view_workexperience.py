@@ -54,7 +54,6 @@ def addNewWorkExperience(request, id):
     context = {
         'employeeData': employeeData,
         'form': form,
-        'title': 'Add Non Formal Education',
-        'legend': 'Aumenta Salariu'
+        'title': 'Add New Work Experience',
     }
-    return render(request, 'employee/add_employeefeducation.html', context)
+    return render(request, 'employee/formulariu.html', context)

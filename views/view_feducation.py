@@ -43,7 +43,6 @@ def addNewFormalEducation(request, id):
     context = {
         'employeeData': employeeData,
         'form': form,
-        'title': 'Add Payroll',
-        'legend': 'Aumenta Salariu'
+        'title': 'Add New Formal Education',
     }
-    return render(request, 'employee/add_employeefeducation.html', context)
+    return render(request, 'employee/formulariu.html', context)

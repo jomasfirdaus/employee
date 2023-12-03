@@ -13,12 +13,11 @@
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="page-header">
 									<h2 class="pageheader-title">Employee Detail  </h2>
-									<p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
 									<div class="page-breadcrumb">
 										<nav aria-label="breadcrumb">
 											<ol class="breadcrumb">
 												<li class="breadcrumb-item"><a href="#" class="breadcrumb-link">CVTL</a></li>
-												<li class="breadcrumb-item active" aria-current="page">Hris Painel</li>
+												<li class="breadcrumb-item active" aria-current="page">HRMS Painel</li>
 											</ol>
 
                                             
@@ -41,10 +40,6 @@
 
 
 								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
-									<div class="section-block">
-										<h5 class="section-title">Vertical tabs</h5>
-										<p>Takes the basic nav from above and adds the .nav-tabs class to generate a tabbed interface..</p>
-									</div>
 									<div class="tab-vertical">
 										<ul class="nav nav-tabs" id="myTab3" role="tablist">
 											<li class="nav-item">
@@ -53,9 +48,11 @@
 											<li class="nav-item">
 												<a class="nav-link {{tab_contract}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeContract' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Contract</a>
 											</li>
+											{% comment %}
 											<li class="nav-item">
 												<a class="nav-link {{tab_payroll}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeePayroll' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Payroll</a>
 											</li>
+											{% endcomment %}
 											<li class="nav-item">
 												<a class="nav-link {{tab_feducation}}" id="profile-vertical-tab" href="{% url 'employee:detailEmployeeFormalEducation' employeeData.id|encrypt_id_tag %}" role="tab" aria-controls="profile" aria-selected="false">Formal Education</a>
 											</li>

@@ -69,7 +69,7 @@ class Employee(models.Model):
 
 
 class EmployeeUser(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, related_name='EmployeeUseremployee', on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="EmployeeUsercreatedbys")

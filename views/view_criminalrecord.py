@@ -51,7 +51,6 @@ def addNewCriminalRecord(request, id):
     context = {
         'employeeData': employeeData,
         'form': form,
-        'title': 'Add Non Formal Education',
-        'legend': 'Aumenta Salariu'
+        'title': 'Add New Criminal Record',
     }
-    return render(request, 'employee/add_employeelanguageskills.html', context)
+    return render(request, 'employee/formulariu.html', context)

@@ -4,6 +4,7 @@ from payroll.models import Salary
 from django.contrib import messages
 from settingapps.utils import  decrypt_id, encrypt_id
 from payroll.forms import SalaryForm
+from contract.models import Contract
 
 
 #Your Code Here
@@ -24,8 +25,27 @@ def detailEmployeePayroll(request, id):
     return render(request, 'employee/detail_employee.html',context)
 
 
-def addNewPayroll(request, id):
+def viewPayrollPerContract(request, id, id_employee):
     id = decrypt_id(id)
+    id_employee = decrypt_id(id_employee)
+
+    employeeData = Employee.objects.get(id=id_employee)
+    contractData = Contract.objects.get(id=id)
+    payrolllist = Salary.objects.filter(contract=contractData).order_by('-id')
+
+    context = {
+        "employeeData" : employeeData,
+        "payrolllist" : payrolllist,
+        "pajina_employee" : "active",
+        "tab_payroll" : "active",
+        "non": 'non',
+    }
+    return render(request, 'employee/detail_employee.html',context)
+
+
+def addNewPayroll(request, id, id_employee):
+    id = decrypt_id(id)
+    id_employee = decrypt_id(id_employee)
 	
     contract = Contract.objects.get(id=id)
 	
@@ -46,13 +66,12 @@ def addNewPayroll(request, id):
         instance.created_by = request.user
         instance.save()
         messages.success(request, f'Payroll add sucessfuly')
-        return redirect('employee:detailEmployeePayroll', id=encrypt_id(id))
+        return redirect('employee:detailEmployeePayroll', id=encrypt_id(id_employee))
     else:
         form = SalaryForm()
     context = {
         'cont': contract,
         'form': form,
-        'title': 'Add Payroll',
-        'legend': 'Aumenta Salariu'
+        'title': 'Add New Payroll',
     }
-    return render(request, 'employee/add_employeepayroll.html', context)
+    return render(request, 'employee/formulariu.html', context)

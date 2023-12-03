@@ -44,6 +44,7 @@
                                                             <th class="border-0">Social Security (4%)</th>
                                                             <th class="border-0"></th>
                                                             <th class="border-0">Net</th>
+                                                            <th class="border-0">Month & Year</th>
                                                             <th class="border-0">#</th>
 													
 														</tr>
@@ -65,12 +66,14 @@
                                                             <td>{{dados.social}}</td>
 															<td>=</td>
                                                             <td>{{dados.net}}</td>
+                                                            <td>{{dados.created_at.month}}/{{dados.created_at.year}}</td>
                                                            <td>
-                                                           {% if forloop.first %}
-                                                           <!-- <a href="{% url 'rekrutamentu:publikavaga' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class=" fas fa-volume-up"></i> Publika vaga</a> -->
-                                                           <a href="{% url 'purchase_request:edititempurchase' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-edit"></i> </a>
-                                                            {% endif %}
-          
+                                                           {% if not non %}
+															{% if forloop.first %}
+															<!-- <a href="{% url 'rekrutamentu:publikavaga' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class=" fas fa-volume-up"></i> Publika vaga</a> -->
+															<a href="{% url 'purchase_request:edititempurchase' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-edit"></i> </a>
+																{% endif %}
+														  {% endif %}
                                                           </td>
 														</tr>
                                                         {% endfor %}

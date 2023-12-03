@@ -46,8 +46,9 @@ def createnewuser(request, id):
             "id": id,
             "auth_groups" : auth_groups,
             "pajina_employee" : "active",
-        }
-        return render(request, 'employee/add_user.html',context)
+            'title': 'Add New user',
+    }
+    return render(request, 'employee/formulariu.html', context)
 
 def changeuser(request, id_employee, id_contract):
     id_employee = decrypt_id(id_employee)

@@ -66,8 +66,9 @@ def editEmployee(request, id):
     context = {
         "form": form,
         "pajina_employee": "active",
+        'title': 'Add Employee Data',
     }
-    return render(request, 'employee/add_employee.html', context)
+    return render(request, 'employee/formulariu.html', context)
 
 
 def detailEmployee(request, id):

@@ -69,10 +69,11 @@
                                                            </td>
                                                            <td>{{dados.is_active}}</td>
                                                            <td>
+														   <a href="{% url 'employee:viewPayrollPerContract' dados.id|encrypt_id_tag employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fa fa-file"></i> payroll </a>
                                                            {% if forloop.first and dados.is_active %}
-                                                           <!-- <a href="{% url 'rekrutamentu:publikavaga' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class=" fas fa-volume-up"></i> Publika vaga</a> -->
-                                                           <a href="{% url 'employee:addNewPayroll' dados.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-paper-plane"></i> </a>
-                                                            {% endif %}
+                                                           <a href="{% url 'employee:addNewPayroll' dados.id|encrypt_id_tag employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-paper-plane"></i> payroll </a><br><br>
+                                                           <a href="{% url 'employee:terminateContract' dados.id|encrypt_id_tag employeeData.id|encrypt_id_tag %}" class="btn btn-primary btn-sm" >  <i class="fas fa-window-close"></i> contract </a>
+                                                           {% endif %}
           
                                                           </td>
 														</tr>

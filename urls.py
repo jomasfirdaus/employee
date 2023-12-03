@@ -15,9 +15,11 @@ urlpatterns = [
     
 	path('detail/employee/contract/<str:id>/', views.detailEmployeeContract, name='detailEmployeeContract'),
 	path('detail/employee/add/new/contract/<str:id>/', views.addNewContract, name='addNewContract'),
+	path('detail/employee/terminate/contract/<str:id>/<str:id_employee>/', views.terminateContract, name='terminateContract'),
     
 	path('detail/employee/payroll/<str:id>/', views.detailEmployeePayroll, name='detailEmployeePayroll'),
-	path('detail/employee/payroll/add/payroll/<str:id>/', views.addNewPayroll, name='addNewPayroll'),
+	path('detail/employee/contract/payroll/<str:id>/<str:id_employee>/', views.viewPayrollPerContract, name='viewPayrollPerContract'),
+	path('detail/employee/payroll/add/payroll/<str:id>/<str:id_employee>/', views.addNewPayroll, name='addNewPayroll'),
     
 	path('detail/employee/formal/education/<str:id>/', views.detailEmployeeFormalEducation, name='detailEmployeeFormalEducation'),
 	path('detail/employee/formal/education/add/formal/education/<str:id>/', views.addNewFormalEducation, name='addNewFormalEducation'),

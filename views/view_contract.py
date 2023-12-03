@@ -6,7 +6,7 @@ from django.contrib import messages
 from settingapps.utils import  decrypt_id, encrypt_id
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group
-from contract.forms import ContractForm
+from contract.forms import ContractForm, TerminateContractForm
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -16,7 +16,6 @@ from django.core.exceptions import ObjectDoesNotExist
 def detailEmployeeContract(request, id):
     id = decrypt_id(id)
     employeeData = Employee.objects.get(id=id)
-    employeeUser = EmployeeUser.objects.filter(employee=employeeData).last()
     contractEmployee = Contract.objects.filter(employeeuser__employee__id=employeeData.id).order_by('-id')
 
     context = {
@@ -119,5 +118,42 @@ def addNewContract(request, id):
     context = {
         "form" : form,
         "pajina_employee" : "active",
-            }
-    return render(request, 'employee/add_employeecontract.html',context)
+        'title': 'Add New Contract',
+    }
+    return render(request, 'employee/formulariu.html', context)
+
+
+
+def terminateContract(request, id, id_employee):
+    id = decrypt_id(id)
+    id_employee = decrypt_id(id_employee)
+
+    contract = Contract.objects.get(id=id)
+    
+    form = TerminateContractForm()
+
+    if request.method == 'POST':
+        form = TerminateContractForm(request.POST, instance=contract)  # Menggunakan instance=contract
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.is_active = False
+            instance.updated_by = request.user
+            instance.save()
+            
+            messages.error(request, 'Terminate Contract Successfully.')  # Error message
+            return redirect('employee:detailEmployeeContract', id=encrypt_id(id_employee))
+        else:
+            error_messages = []  # Initialize an empty list to store custom error messages
+            for field, errors in form.errors.items():
+                for error in errors:
+                    error_messages.append(f"{field}: {error}")
+            print(str(error_messages))
+            messages.error(request, 'There was an error. Please correct the form.')  # Error message
+            return redirect('employee:terminateContract', id=encrypt_id(id), id_employee = encrypt_id(id_employee))
+
+    context = {
+        "form" : form,
+        "pajina_employee" : "active",
+        'title': 'Add New Contract',
+    }
+    return render(request, 'employee/formulariu.html', context)
